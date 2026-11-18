@@ -7,7 +7,6 @@
 // ============================================================
 
 // ------------------------------------------------------------
-// TODO P1.2.9 — "O que entregar": responda as três perguntas abaixo,
 //   uma linha cada, antes de entregar.
 //
 //   1. Qual estado impossível a união discriminada torna não representável?
@@ -25,7 +24,6 @@ import { buscarPetEmDestaque } from './services/pet-service';
 export type { EstadoTela };
 
 // ============================================================
-// TODO P1.2.7 — devolva o texto que a tela mostraria em cada estado.
 //   Use SOMENTE os campos que existem em cada variante.
 //   Não escreva `default`.
 //     carregando → 'Carregando…'
@@ -44,7 +42,6 @@ export function descreverTela(estado: EstadoTela<Pet>): string {
 }
 
 // ============================================================
-// TODO P1.2.8 — carregue o pet e devolva o EstadoTela resultante.
 //   Sucesso → { tipo: 'sucesso', dados }
 //   Falha   → { tipo: 'erro', mensagem }  (nunca deixe a exceção escapar)
 //   Lembre: em TypeScript o `catch` recebe `unknown`, não `Error`.

@@ -6,21 +6,18 @@
 // Moram aqui para serem testáveis e reutilizáveis independentemente.
 // ============================================================
 
-import type { Pet } from '../types/pet';
+import type { Pet, StatusPasseio } from '../types/pet';
 import { rotuloStatusPasseio } from '../types/pet';
 
 export type Secao = { title: string; data: Pet[] };
 
 export function agrupar(pets: Pet[]): Secao[] {
-  // TODO P3.2: agrupe pelo critério que o grupo escolheu.
-  // TODO P3.3: descarte grupos vazios — seção sem itens não aparece na lista.
-  // TODO P3.4: a ordem dos grupos é uma DECISÃO de produto.
-  // A decisão foi agrupar pelo statusPasseio. A ordem é 'pendente', 'concluido', 'cancelado' 
+        // A decisão foi agrupar pelo statusPasseio. A ordem é 'pendente', 'concluido', 'cancelado'
   // porque 'pendente' é o que exige ação do usuário mais imediatamente.
-  const grupos = {
-    pendente: [] as Pet[],
-    concluido: [] as Pet[],
-    cancelado: [] as Pet[],
+  const grupos: Record<StatusPasseio, Pet[]> = {
+    pendente: [],
+    concluido: [],
+    cancelado: [],
   };
 
   for (const pet of pets) {
@@ -43,8 +40,7 @@ export function agrupar(pets: Pet[]): Secao[] {
 }
 
 export function filtrarPorNome(pets: Pet[], busca: string): Pet[] {
-  // TODO P3.5: busca case-insensitive. Busca vazia devolve todos.
-  if (!busca.trim()) return pets;
+    if (!busca.trim()) return pets;
   
   const termo = busca.toLowerCase();
   return pets.filter(p => p.nome.toLowerCase().includes(termo));

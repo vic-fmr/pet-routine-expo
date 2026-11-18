@@ -3,7 +3,6 @@
 // Disciplina: Desenvolvimento Mobile (2026.2.DM) — CESAR School
 //
 // Leia o enunciado completo em `PRATICA.md` › "Prática 1".
-// Onde houver `/* … */` ou `TODO`, é a sua vez de escrever.
 // Os blocos marcados como VERIFICAÇÃO **não devem ser apagados**.
 //
 // Regras do domínio (resumo — o enunciado manda):
@@ -18,7 +17,6 @@
 // ============================================================
 
 // ============================================================
-// TODO P1.1.1 — Union types literais. Nenhum destes pode ser `string`.
 //   EspeciePet     → cachorro, gato, ave, outro
 //   PortePet       → pequeno, medio, grande
 //   StatusPasseio  → pendente, concluido, cancelado
@@ -28,7 +26,6 @@ export type PortePet = 'pequeno' | 'medio' | 'grande';
 export type StatusPasseio = 'pendente' | 'concluido' | 'cancelado';
 
 // ============================================================
-// TODO P1.1.2 — A entidade completa, como ela virá do servidor um dia.
 //   Campos: id, nome, especie, porte, statusPasseio, idadeMeses, criadoEm.
 //   Pense no tipo de cada um. Você vai justificar uma dessas escolhas
 //   na Prática 2.
@@ -49,7 +46,6 @@ export interface Pet {
 }
 
 // ============================================================
-// TODO P1.1.3 — Tipos DERIVADOS. Use utility types; não redigite campos.
 //   NovoPet         → o que o formulário de cadastro envia
 //   ResumoPet       → o que o card da lista "Meus pets" precisa
 //   AtualizacaoPet  → edição parcial de um pet já cadastrado
@@ -62,7 +58,6 @@ export type ResumoPet = Pick<Pet, 'id' | 'nome' | 'especie' | 'statusPasseio'>;
 export type AtualizacaoPet = Partial<NovoPet>;
 
 // ============================================================
-// TODO P1.1.4 — Rótulos legíveis, com switch exaustivo e SEM `default`.
 //   Sem `default`, o compilador avisa se um dia você acrescentar uma
 //   variante ao union e esquecer de tratá-la aqui. É esse o ponto.
 // ============================================================
@@ -126,7 +121,6 @@ void resumo;
 void parcial;
 
 // ============================================================
-// TODO P1.1.5 — Teste final da prática (responda aqui, em comentário)
 //   Acrescente o campo `microchip: string` à interface `Pet`.
 //   Quantos dos três tipos derivados você precisou editar à mão?
 //

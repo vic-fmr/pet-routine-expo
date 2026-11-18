@@ -24,9 +24,8 @@ type CardPetProps = {
 export function CardPet({ pet, aoRegistrarPasseio }: CardPetProps) {
   return (
     <Card>
-      {/* TODO P3.25: miniatura com expo-image. */}
-      {/* TODO P3.26: contentFit="cover" preenche a caixa sem distorcer e oculta partes que sobram,
-                enquanto "contain" deixaria faixas vazias. */}
+      {}
+      {}
       {pet.fotoUri ? (
         <Image
           source={{ uri: pet.fotoUri }}
@@ -48,7 +47,7 @@ export function CardPet({ pet, aoRegistrarPasseio }: CardPetProps) {
 
       <Text style={tipografia.legenda}>{pet.idadeMeses} meses</Text>
 
-      {/* TODO P3.27: latitude e longitude de forma legível. */}
+      {}
       {pet.local && (
         <Text style={tipografia.corpo}>
           Local: {pet.local.latitude.toFixed(3)}, {pet.local.longitude.toFixed(3)} (±{Math.round(pet.local.precisaoMetros)}m)

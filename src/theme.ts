@@ -15,8 +15,7 @@
 export const cores = {
   fundo: '#FEF7EE',
   cartao: '#FFFFFF',
-  // TODO P2.1: complete com pelo menos mais cinco tokens de cor:
-  //   texto, textoFraco, primaria, sucesso, erro.
+    //   texto, textoFraco, primaria, sucesso, erro.
   //   Escolha cores que façam sentido para um app de pets.
   //   Exemplo: primaria poderia ser um laranja acolhedor.
   texto: '#333333',
@@ -27,8 +26,7 @@ export const cores = {
 } as const;
 
 export const espaco = {
-  // TODO P2.2: escala de no mínimo 4 degraus (xs, sm, md, lg).
-  //   Escolha uma progressão consistente — 4/8/16/24 é um bom default.
+    //   Escolha uma progressão consistente — 4/8/16/24 é um bom default.
   //   Exemplo: xs: 4, sm: 8, md: 16, lg: 24
   xs: 4,
   sm: 8,
@@ -38,8 +36,7 @@ export const espaco = {
 } as const;
 
 export const tipografia = {
-  // TODO P2.3: titulo, corpo, legenda. Cada um é um objeto de estilo
-  //   de TEXTO (fontSize, fontWeight, color).
+    //   de TEXTO (fontSize, fontWeight, color).
   //   A legenda pode reaproveitar `cores.textoFraco`.
   //   Não inclua layout (margin, padding) — isso é decisão do componente.
   //
@@ -50,6 +47,5 @@ export const tipografia = {
   legenda: { fontSize: 12, fontWeight: '400' as const, color: '#777777' },
 } as const;
 
-// TODO P2.4: por que este arquivo usa `as const` e o StyleSheet.create
 //   do componente NÃO usa? Responda em um comentário de uma linha aqui.
 // O as const permite inferência de tipos literais fortes para os tokens; StyleSheet.create já retorna tipos válidos pro RN e não precisa de cast literal.

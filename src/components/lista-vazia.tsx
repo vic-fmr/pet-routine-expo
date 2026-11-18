@@ -12,13 +12,11 @@ import { StyleSheet, Text, View } from 'react-native';
 import { cores, espaco, tipografia } from '../theme';
 
 type ListaVaziaProps = {
-  // TODO P3.12: uma prop que permita distinguir "primeiro acesso" de "busca sem resultado".
-  termoBusca?: string;
+    termoBusca?: string;
 };
 
 export function ListaVazia({ termoBusca }: ListaVaziaProps) {
-  // TODO P3.13: dois textos diferentes, conforme o cenário.
-  const texto = termoBusca && termoBusca.trim() !== ''
+    const texto = termoBusca && termoBusca.trim() !== ''
     ? `Nenhum pet encontrado para '${termoBusca}'.`
     : 'Nenhum pet cadastrado. Que tal adicionar um?';
 
@@ -33,8 +31,7 @@ export function ListaVazia({ termoBusca }: ListaVaziaProps) {
 
 const styles = StyleSheet.create({
   container: {
-    // TODO P3.14: centralize e use padding generoso
-    alignItems: 'center',
+        alignItems: 'center',
     padding: espaco.xl,
   },
   texto: {

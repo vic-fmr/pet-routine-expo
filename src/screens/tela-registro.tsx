@@ -35,11 +35,9 @@ export function TelaRegistro({ pet, onSalvar, onCancelar }: TelaRegistroProps) {
   const [erro, setErro] = useState('');
   const [mostrarCamera, setMostrarCamera] = useState(false);
 
-  // TODO P3.16: hook de permissão de câmera (das libs, não do React):
-  const [permissaoCamera, pedirPermissaoCamera] = useCameraPermissions();
+    const [permissaoCamera, pedirPermissaoCamera] = useCameraPermissions();
 
-  // TODO P3.17: ref da câmera via useState (useRef não está disponível nesta prática).
-  const [cameraRef, setCameraRef] = useState<CameraView | null>(null);
+    const [cameraRef, setCameraRef] = useState<CameraView | null>(null);
 
   // ----- Localização -----
   // CONTRATO: 1. PEDIR → Location.requestForegroundPermissionsAsync()
@@ -111,9 +109,7 @@ export function TelaRegistro({ pet, onSalvar, onCancelar }: TelaRegistroProps) {
   }
 
   function salvar() {
-    // TODO P3.23: chame onSalvar com os dados capturados.
-    // TODO P3.24: o app funciona MESMO quando o usuário nega tudo.
-    onSalvar(local ?? undefined, fotoUri ?? undefined);
+            onSalvar(local ?? undefined, fotoUri ?? undefined);
   }
 
   // ----- Renderização: câmera ativa -----
@@ -142,7 +138,7 @@ export function TelaRegistro({ pet, onSalvar, onCancelar }: TelaRegistroProps) {
     <View style={styles.tela}>
       <Text style={tipografia.titulo}>Registrar passeio de {pet.nome}</Text>
 
-      {/* TODO P3.21: mostre o erro com mensagem DISTINTA por cenário. */}
+      {}
       {erro !== '' && <Text style={styles.erro}>{erro}</Text>}
 
       {/* Localização */}
