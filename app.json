@@ -3,13 +3,17 @@
     "name": "pet-routine-expo",
     "slug": "pet-routine-expo",
     "version": "1.0.0",
+    "scheme": "petroutine",
+    "runtimeVersion": { "policy": "appVersion" },
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "ios": {
+      "bundleIdentifier": "br.cesarschool.petroutine",
       "supportsTablet": true
     },
     "android": {
+      "package": "br.cesarschool.petroutine",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/android-icon-foreground.png",
@@ -22,7 +26,18 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-image"
+      "expo-image",
+      [
+        "expo-image-picker",
+        {
+          "cameraPermission": "Permita o acesso à câmera para fotografar o seu pet.",
+          "photosPermission": "Permita o acesso às fotos para escolher uma imagem do seu pet.",
+          "microphonePermission": false
+        }
+      ],
+      "expo-router",
+      "expo-sqlite",
+      "expo-secure-store"
     ]
   }
 }
