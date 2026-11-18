@@ -1,67 +1,45 @@
-# Relatório de Uso de Inteligência Artificial — Mini-Projeto (Unidade 2)
+# Relatório de Uso de Inteligência Artificial — Mini-Projeto
 
-> **Disciplina:** Desenvolvimento Mobile (2026.2.DM) — CESAR School  
-> **Projeto:** App de Gestão e Rotina Pet (`pet-routine-expo`)  
-> **Estudante:** ____________________________________________________  
-> **Data:** ____/____/2026
+**Disciplina:** Desenvolvimento Mobile (2026.2.DM) — CESAR School
+**Projeto:** Pet Routine Expo
+**Integrantes:** Alessandra Barbosa, Camila Teixeira, Lucas Rodrigues, Rayane Cavalcanti, René Lucena, Samuel Araujo, Ana Sofia e Gabriela Damásio
+**Data:** 18/11/2026
 
----
+## 1. Declaração Obrigatória
 
-## 1. Declaração Obrigatória (Política de Governança de IA do CESAR)
+- [x] Utilizei GPT-5.6 Luna, ferramenta constante no Catálogo de IA do CESAR, na implementação.
+- [ ] NÃO utilizei nenhuma ferramenta de inteligência artificial.
 
-> ⚠️ **Preenchimento obrigatório.** Caso não tenha utilizado nenhuma ferramenta de IA em nenhuma etapa do mini-projeto, assinale a opção correspondente abaixo e justifique na Seção 2.
+Texto oficial:
 
-- [ ] **Utilizei** ferramenta(s) de Inteligência Artificial constante(s) no Catálogo de IA do CESAR e preenchi a declaração narrativa e a curadoria técnica abaixo.
-- [ ] **NÃO utilizei** nenhuma ferramenta de Inteligência Artificial no desenvolvimento, refatoração de UI/UX ou documentação deste mini-projeto.
+> “Declaramos que utilizamos o GPT-5.6 Luna, ferramenta constante no Catálogo de IA do CESAR, nesta atividade, com a finalidade de gerar rascunhos sobre a estrutura Expo Router, autenticação, Zustand, persistência SQLite, notificações, integração com o backend e reformulação de UI/UX. Realizamos análise crítica e curadoria técnica das informações apresentadas. Não tratamos dados pessoais, senhas reais ou chaves privadas no uso da ferramenta. Revisamos o conteúdo gerado, identificamos e corrigimos imprecisões, e assumimos responsabilidade integral pela versão final apresentada.”
 
-### Texto da Declaração Oficial
+## 2. Registro por Etapa
 
-> *"Declaro que utilizei a(s) ferramenta(s) de Inteligência Artificial **[informar nome e versão do modelo/ferramenta, conforme constante no Catálogo de IA do CESAR]** nesta atividade, com a finalidade de gerar um rascunho sobre **[informar temas/etapas: ex. estrutura de navegação com Expo Router, integração Zustand + API, refatoração de componentes com GlueStack UI e NativeWind]**, sobre o qual realizei análise crítica (curadoria) das informações apresentadas. Não tratei dados pessoais no uso desta ferramenta. Revisei criticamente o conteúdo gerado, identificando seus acertos e eventuais imprecisões, e assumo a responsabilidade integral pela versão final apresentada."*
+| Etapa | Ferramenta | Uso | Aproveitado | Curadoria |
+|---|---|---|---|---|
+| 1 — Router e foto | GPT-5.6 Luna | Criou rotas, ImagePicker e app.json | Estrutura final e contrato 1:1 | Corrigido para `mediaTypes: ['images']`, cancelamento antes de assets e permissão bloqueada/negada |
+| 2 — Tabs, detalhe e notificações | GPT-5.6 Luna | Criou Tabs, rota dinâmica e agendamento | Navegação e listeners | Adicionados cleanup dos listeners e navegação por `/pet/[id]` |
+| 3 — Tema, timer e SQLite | GPT-5.6 Luna | Criou contexto, intervalo e banco local | Persistência e histórico | Incluído cleanup de intervalo e placeholders seguros |
+| 4 — Auth e API | GPT-5.6 Luna | Criou stores, guardas e CRUD | Fluxo JWT completo | Revisado tratamento 401/403, hidratação e tipagem estrita |
+| 5 — UI, OTA e EAS | GPT-5.6 Luna | Criou redesign, controles nativos e perfis | Componentes e builds | Configurado OTA com proteção `__DEV__`, APK preview e identificadores nativos |
+| UI/UX | GPT-5.6 Luna | Reformulou telas e estados | Hierarquia visual, badges e tema | Aplicados `gap`, feedback press, estados vazios/erro e remoção de estilos legados |
 
----
+## 3. Curadoria Técnica
 
-## 2. Registro de Uso por Etapa do Mini-Projeto
+### 3.1. Acertos
 
-Liste todas as interações relevantes realizadas com ferramentas de IA durante o desenvolvimento das Etapas 1 a 5 e na reformulação de UI/UX.
+A IA acelerou a criação da estrutura de pastas, tipos, rotas e integração entre Zustand e API. A separação entre componentes reutilizáveis e arquivos de rota preservou a organização exigida.
 
-| # | Etapa do Mini-Projeto | Ferramenta e Versão | Finalidade / Resumo do Prompt | O que foi aproveitado? | O que precisou ser corrigido ou descartado? |
-|---|---|---|---|---|---|
-| 1 | *(Ex.: Etapa 1 — Expo Router + Image Picker)* | *(Ex.: ChatGPT GPT-4o / Claude 3.7 Sonnet / Gemini 2.5 Pro)* | | | |
-| 2 | *(Ex.: Etapa 2 — Drawer, Tabs, `[id]` e Notificações)* | | | | |
-| 3 | *(Ex.: Etapa 3 — Hooks, Zustand, `AsyncStorage` e `expo-sqlite`)* | | | | |
-| 4 | *(Ex.: Etapa 4 — Auth com `sessionToken` e CRUD no Backend)* | | | | |
-| 5 | *(Ex.: Etapa 5 — UI/UX com GlueStack/NativeWind, `@expo/ui`, OTA e EAS)* | | | | |
+### 3.2. Imprecisões corrigidas
 
----
+1. **Sugestão antiga de Image Picker:** a IA poderia usar `MediaTypeOptions.Images` e ler `assets` sem verificar cancelamento. Isso violava as regras 18 e 19. Corrigimos para `mediaTypes: ['images']` e `if (resultado.canceled) return`.
 
-## 3. Análise Crítica e Curadoria Técnica (Acertos, Erros e Alucinações)
+2. **Sugestão de estilos legados:** rascunhos poderiam usar `shadowColor`, `shadowOffset`, `shadowOpacity` e `shadowRadius`. Substituímos por `boxShadow`, conforme a regra 4.
 
-Modelos de linguagem frequentemente sugerem APIs depreciadas do ecossistema React Native / Expo (como `@react-navigation/*` manual em vez de `expo-router`, `ImagePicker.MediaTypeOptions.Images` em vez de `['images']`, `result.cancelled` com dois "L", `shadow*`/`elevation` em vez de `boxShadow`, ou mutação direta de arrays).
+Outros ajustes incluíram remoção de `any`, limpeza obrigatória de listeners e intervalos, uso de `Link` para navegação declarativa e `router.push/replace/back` em ações de função.
 
-Responda com base no que aconteceu durante o desenvolvimento do seu grupo:
+## 4. Proteção de Dados e Autoria
 
-### 3.1. Principais Acertos da Ferramenta
-*(Onde a IA realmente economizou tempo sem comprometer a arquitetura da disciplina?)*
-
-________________________________________________________________________________
-________________________________________________________________________________
-
-### 3.2. Imprecisões, Código Desatualizado ("Zumbis") ou Violações das Regras da Disciplina
-*(Cite pelo menos **dois** trechos ou sugestões geradas pela IA que violavam as 20 regras de escrita da disciplina ou usavam APIs antigas do Expo SDK, mostrando o que a IA sugeriu vs. como você corrigiu.)*
-
-1. **Problema identificado na sugestão da IA:**
-   - **O que a IA gerou:** `________________________________________________________`
-   - **Por que estava incorreto/desatualizado:** `____________________________________`
-   - **Como corrigimos no código final:** `__________________________________________`
-
-2. **Problema identificado na sugestão da IA:**
-   - **O que a IA gerou:** `________________________________________________________`
-   - **Por que estava incorreto/desatualizado:** `____________________________________`
-   - **Como corrigimos no código final:** `__________________________________________`
-
----
-
-## 4. Confirmação de Proteção de Dados e Autoria
-
-- [ ] Confirmo que **nenhum dado pessoal ou sensível** (próprio, de colegas ou de terceiros) nem chaves privadas reais foram inseridos nos prompts enviados às ferramentas de IA.
-- [ ] Confirmo que compreendo integralmente o funcionamento de cada arquivo entregue na branch e sou capaz de explicar e modificar qualquer trecho durante a arguição/avaliação.
+- [x] Nenhum dado pessoal ou sensível foi inserido em prompts.
+- [x] Entendo a arquitetura final e posso explicar e modificar os principais arquivos.
