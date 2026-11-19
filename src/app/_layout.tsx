@@ -12,7 +12,7 @@ function AppShell() {
   const router = useRouter();
   const segments = useSegments();
   const { sessionToken, isHydrated } = useAuthStore();
-  const { isDark } = useTheme();
+  const { isDark, colors } = useTheme();
 
   useEffect(() => {
     if (!isHydrated) return;
@@ -47,9 +47,39 @@ function AppShell() {
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="(auth)" />
         <Stack.Screen name="(tabs)" />
-        <Stack.Screen name="pet/[id]" options={{ headerShown: true, title: 'Detalhes do pet' }} />
-        <Stack.Screen name="foto-do-pet" options={{ headerShown: true, title: 'Foto do pet' }} />
-        <Stack.Screen name="sobre" options={{ headerShown: true, title: 'Sobre' }} />
+        <Stack.Screen
+          name="pet/[id]"
+          options={{
+            headerShown: true,
+            title: 'Detalhes do pet',
+            headerStyle: { backgroundColor: colors.background },
+            headerTintColor: colors.text,
+            headerTitleStyle: { color: colors.text, fontWeight: '700' },
+            headerShadowVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="foto-do-pet"
+          options={{
+            headerShown: true,
+            title: 'Foto do pet',
+            headerStyle: { backgroundColor: colors.background },
+            headerTintColor: colors.text,
+            headerTitleStyle: { color: colors.text, fontWeight: '700' },
+            headerShadowVisible: false,
+          }}
+        />
+        <Stack.Screen
+          name="sobre"
+          options={{
+            headerShown: true,
+            title: 'Sobre',
+            headerStyle: { backgroundColor: colors.background },
+            headerTintColor: colors.text,
+            headerTitleStyle: { color: colors.text, fontWeight: '700' },
+            headerShadowVisible: false,
+          }}
+        />
       </Stack>
     </>
   );
