@@ -35,15 +35,15 @@ export default function StatsScreen() {
         <Text style={{ color: colors.textMuted }}>{user?.email}</Text>
       </View>
       <View style={styles.metrics}>
-        <Metric label="Pets" value={total} card={card} text={text} />
-        <Metric label="Concluídos" value={concluidos} card={card} text={text} />
-        <Metric label="Pendentes" value={pendentes} card={card} text={text} />
-        <Metric label="Cancelados" value={cancelados} card={card} text={text} />
+        <Metric label="Pets" value={total} card={card} text={text} muted={colors.textMuted} />
+        <Metric label="Concluídos" value={concluidos} card={card} text={text} muted={colors.textMuted} />
+        <Metric label="Pendentes" value={pendentes} card={card} text={text} muted={colors.textMuted} />
+        <Metric label="Cancelados" value={cancelados} card={card} text={text} muted={colors.textMuted} />
       </View>
       <View style={[styles.card, { backgroundColor: card }]}>
         <Text style={[styles.cardTitle, { color: text }]}>Progresso hoje</Text>
         <Text style={[styles.percent, { color: colors.primary }]}>{percent}%</Text>
-        <View style={styles.progressTrack}><View style={[styles.progressFill, { width: `${percent}%` }]} /></View>
+        <View style={[styles.progressTrack, { backgroundColor: colors.surfaceMuted }]}><View style={[styles.progressFill, { width: `${percent}%`, backgroundColor: colors.primary }]} /></View>
       </View>
       <View style={[styles.card, { backgroundColor: card }]}>
         <View style={styles.themeRow}>
@@ -71,11 +71,11 @@ export default function StatsScreen() {
   );
 }
 
-function Metric({ label, value, card, text }: { label: string; value: number; card: string; text: string }) {
+function Metric({ label, value, card, text, muted }: { label: string; value: number; card: string; text: string; muted: string }) {
   return (
     <View style={[styles.metric, { backgroundColor: card }]}>
       <Text style={[styles.metricValue, { color: text }]}>{value}</Text>
-      <Text style={{ color: '#607D8B', fontWeight: '700' }}>{label}</Text>
+      <Text style={{ color: muted, fontWeight: '700' }}>{label}</Text>
     </View>
   );
 }

@@ -23,7 +23,7 @@ export default function SobreScreen() {
 const styles = StyleSheet.create({
   screen: { flex: 1 },
   content: { padding: espaco.lg, gap: espaco.md },
-  title: { fontSize: 30, fontWeight: '800', color: '#263238' },
+  title: { fontSize: 30, fontWeight: '800' },
   heading: { fontSize: 20, fontWeight: '800' },
   text: { lineHeight: 22 },
   card: { minHeight: alvoToque, gap: espaco.sm, padding: espaco.md, borderRadius: raio.grande, boxShadow: '0 4px 12px rgba(38,50,56,0.08)' },

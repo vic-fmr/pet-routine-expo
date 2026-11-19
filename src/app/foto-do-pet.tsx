@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
   error: { color: '#D32F2F', padding: 12, borderRadius: 10, backgroundColor: '#FFEBEE' },
   button: { minHeight: alvoToque, alignItems: 'center', justifyContent: 'center', padding: espaco.smd, borderRadius: raio.medio },
   disabled: { opacity: 0.45 },
-  buttonText: { color: '#FFFFFF', fontWeight: '800' },
+  buttonText: { fontWeight: '800' },
   secondary: { minHeight: alvoToque, alignItems: 'center', justifyContent: 'center', padding: espaco.smd, borderRadius: raio.medio, borderWidth: 1 },
   secondaryText: { fontWeight: '800' },
 });

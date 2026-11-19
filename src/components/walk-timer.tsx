@@ -44,7 +44,7 @@ export function WalkTimer({ onSalvar }: WalkTimerProps) {
 
 const styles = StyleSheet.create({
   container: { alignItems: 'center', gap: espaco.smd, padding: espaco.md, borderRadius: raio.grande },
-  time: { fontSize: 36, fontWeight: '700', color: '#263238' },
+  time: { fontSize: 36, fontWeight: '700' },
   actions: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center', gap: espaco.sm },
   button: { minHeight: alvoToque, justifyContent: 'center', paddingHorizontal: espaco.smd, paddingVertical: espaco.sm, borderRadius: raio.medio },
   buttonText: { fontWeight: '700' },

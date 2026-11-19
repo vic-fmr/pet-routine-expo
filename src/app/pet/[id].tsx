@@ -104,15 +104,15 @@ export default function PetDetailScreen() {
       {pet.fotoUri ? (
         <Image source={{ uri: pet.fotoUri }} style={styles.hero} contentFit="cover" recyclingKey={pet.id} />
       ) : (
-        <View style={[styles.hero, styles.placeholder]}><Text style={styles.placeholderText}>🐾</Text></View>
+        <View style={[styles.hero, styles.placeholder, { backgroundColor: colors.surfaceMuted }]}><Text style={styles.placeholderText}>🐾</Text></View>
       )}
-      <View style={styles.card}>
+      <View style={[styles.card, { backgroundColor: colors.surface }]}>
         <Text style={[styles.name, { color: text }]}>{pet.nome}</Text>
         <View style={styles.badges}>
-          <Text style={styles.badge}>{rotuloEspecie(pet.especie)}</Text>
-          <Text style={styles.badge}>{pet.porte}</Text>
-          <Text style={styles.badge}>{pet.idadeMeses} meses</Text>
-          <Text style={styles.statusBadge}>{rotuloStatusPasseio(pet.statusPasseio)}</Text>
+          <Text style={[styles.badge, { backgroundColor: colors.surfaceMuted, color: colors.textMuted }]}>{rotuloEspecie(pet.especie)}</Text>
+          <Text style={[styles.badge, { backgroundColor: colors.surfaceMuted, color: colors.textMuted }]}>{pet.porte}</Text>
+          <Text style={[styles.badge, { backgroundColor: colors.surfaceMuted, color: colors.textMuted }]}>{pet.idadeMeses} meses</Text>
+          <Text style={[styles.statusBadge, { backgroundColor: colors.primaryPressed, color: colors.primaryText }]}>{rotuloStatusPasseio(pet.statusPasseio)}</Text>
         </View>
         {pet.local ? (
           <Text style={{ color: text }}>
@@ -122,15 +122,15 @@ export default function PetDetailScreen() {
       </View>
       {sensorError && <Text style={styles.error}>{sensorError}</Text>}
       <View style={styles.actions}>
-        <Pressable onPress={() => void togglePasseio(pet.id)} accessibilityRole="button" accessibilityLabel={`Alternar status de ${pet.nome}`} style={styles.action}><Text style={styles.actionText}>Alternar status</Text></Pressable>
-        <Pressable onPress={() => void registrarComFoto()} accessibilityRole="button" accessibilityLabel={`Registrar passeio de ${pet.nome} com GPS`} style={styles.action}><Text style={styles.actionText}>Registrar com GPS</Text></Pressable>
-        <Pressable onPress={() => void escolherFoto()} accessibilityRole="button" accessibilityLabel={`Escolher foto para o passeio de ${pet.nome}`} style={styles.action}><Text style={styles.actionText}>Escolher foto</Text></Pressable>
-        <Link href={{ pathname: '/foto-do-pet', params: { petId: pet.id } }} style={styles.actionLink} accessibilityRole="button">Abrir câmera e galeria</Link>
+        <Pressable onPress={() => void togglePasseio(pet.id)} accessibilityRole="button" accessibilityLabel={`Alternar status de ${pet.nome}`} style={[styles.action, { backgroundColor: colors.primary }]}><Text style={[styles.actionText, { color: colors.primaryText }]}>Alternar status</Text></Pressable>
+        <Pressable onPress={() => void registrarComFoto()} accessibilityRole="button" accessibilityLabel={`Registrar passeio de ${pet.nome} com GPS`} style={[styles.action, { backgroundColor: colors.primary }]}><Text style={[styles.actionText, { color: colors.primaryText }]}>Registrar com GPS</Text></Pressable>
+        <Pressable onPress={() => void escolherFoto()} accessibilityRole="button" accessibilityLabel={`Escolher foto para o passeio de ${pet.nome}`} style={[styles.action, { backgroundColor: colors.primary }]}><Text style={[styles.actionText, { color: colors.primaryText }]}>Escolher foto</Text></Pressable>
+        <Link href={{ pathname: '/foto-do-pet', params: { petId: pet.id } }} style={[styles.actionLink, { backgroundColor: colors.surfaceMuted, color: colors.text }]} accessibilityRole="button">Abrir câmera e galeria</Link>
       </View>
       <WalkTimer onSalvar={(seconds) => void salvarTempo(seconds)} />
-      <Pressable onPress={() => void agendar()} accessibilityRole="button" accessibilityLabel="Agendar lembrete de passeio para cinco segundos" style={styles.action}><Text style={styles.actionText}>Agendar lembrete em 5 segundos</Text></Pressable>
+      <Pressable onPress={() => void agendar()} accessibilityRole="button" accessibilityLabel="Agendar lembrete de passeio para cinco segundos" style={[styles.action, { backgroundColor: colors.primary }]}><Text style={[styles.actionText, { color: colors.primaryText }]}>Agendar lembrete em 5 segundos</Text></Pressable>
       {notificationSent && <Text style={styles.success}>Lembrete agendado.</Text>}
-      <View style={styles.card}>
+      <View style={[styles.card, { backgroundColor: colors.surface }]}>
         <Text style={[styles.sectionTitle, { color: text }]}>Histórico local</Text>
         {logs.length === 0 ? <Text style={{ color: text }}>Nenhuma sessão registrada ainda.</Text> : logs.map((log) => (
           <View key={log.id} style={styles.logRow}>
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
   hero: { width: '100%', aspectRatio: 1.35, borderRadius: 20 },
   placeholder: { alignItems: 'center', justifyContent: 'center', backgroundColor: '#EDF2F4' },
   placeholderText: { fontSize: 72 },
-  card: { gap: 10, padding: 16, borderRadius: 16, backgroundColor: '#FFFFFF', boxShadow: '0 4px 12px rgba(38,50,56,0.08)' },
+  card: { gap: 10, padding: 16, borderRadius: 16, boxShadow: '0 4px 12px rgba(38,50,56,0.08)' },
   name: { fontSize: 28, fontWeight: '800' },
   badges: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 },
   badge: { paddingHorizontal: 8, paddingVertical: 5, borderRadius: 12, backgroundColor: '#EDF2F4', color: '#455A64', fontWeight: '700' },
@@ -159,9 +159,9 @@ const styles = StyleSheet.create({
   error: { color: '#D32F2F', padding: 10, borderRadius: 10, backgroundColor: '#FFEBEE' },
   success: { color: '#2E7D32', fontWeight: '700' },
   actions: { gap: 8 },
-  action: { minHeight: alvoToque, justifyContent: 'center', alignItems: 'center', padding: espaco.smd, borderRadius: raio.medio, backgroundColor: '#FF8C42' },
-  actionLink: { minHeight: alvoToque, textAlign: 'center', textAlignVertical: 'center', padding: espaco.smd, borderRadius: raio.medio, backgroundColor: '#FFE2CD', color: '#263238', fontWeight: '700' },
-  actionText: { color: '#FFFFFF', fontWeight: '800' },
+  action: { minHeight: alvoToque, justifyContent: 'center', alignItems: 'center', padding: espaco.smd, borderRadius: raio.medio },
+  actionLink: { minHeight: alvoToque, textAlign: 'center', textAlignVertical: 'center', padding: espaco.smd, borderRadius: raio.medio, fontWeight: '700' },
+  actionText: { fontWeight: '800' },
   sectionTitle: { fontSize: 18, fontWeight: '800' },
   logRow: { flexDirection: 'row', justifyContent: 'space-between', gap: 8, paddingVertical: 6 },
   delete: { minHeight: alvoToque, justifyContent: 'center', alignItems: 'center', padding: espaco.smd, borderRadius: raio.medio, backgroundColor: '#D32F2F' },

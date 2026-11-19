@@ -3,14 +3,14 @@ import { Feather } from '@expo/vector-icons';
 import { useTheme } from '../../context/theme-context';
 
 export default function TabsLayout() {
-  const { isDark } = useTheme();
+  const { colors } = useTheme();
   return (
     <Tabs
       screenOptions={{
-        headerStyle: { backgroundColor: isDark ? '#17212B' : '#FEF7EE' },
-        headerTintColor: isDark ? '#FFFFFF' : '#263238',
-        tabBarStyle: { backgroundColor: isDark ? '#17212B' : '#FFFFFF' },
-        tabBarActiveTintColor: '#FF8C42',
+        headerStyle: { backgroundColor: colors.background },
+        headerTintColor: colors.text,
+        tabBarStyle: { backgroundColor: colors.surface, borderTopColor: colors.border },
+        tabBarActiveTintColor: colors.primary,
       }}
     >
       <Tabs.Screen name="index" options={{ title: 'Meus Pets', tabBarIcon: ({ color, size }) => <Feather name="heart" size={size} color={color} /> }} />
