@@ -46,3 +46,7 @@ CLAUDE.md
 .claude
 .agents
 .rtk
+
+# Relatorios locais de desenvolvimento e apresentacao
+RELATORIO_DEPLOY_AWS.md
+ROTEIRO_APRESENTACAO_AWS.md
