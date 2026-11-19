@@ -107,12 +107,26 @@ export default function PetsScreen() {
               <Text style={[styles.emptyTitle, { color: colors.text }]}>
                 {pets.length === 0 ? 'Sua conta ainda não tem pets' : 'Nenhum pet corresponde à busca'}
               </Text>
-              {pets.length === 0 && <Pressable onPress={() => setModal(true)} style={styles.toggle}><Text style={styles.toggleText}>Cadastrar primeiro pet</Text></Pressable>}
+              {pets.length === 0 && (
+                <Pressable
+                  onPress={() => setModal(true)}
+                  accessibilityRole="button"
+                  accessibilityLabel="Cadastrar primeiro pet"
+                  style={({ pressed }) => [
+                    styles.firstPetButton,
+                    { backgroundColor: pressed ? colors.primaryPressed : colors.primary },
+                    pressed && styles.pressed,
+                  ]}
+                >
+                  <Text style={[styles.firstPetIcon, { color: colors.primaryText }]}>＋</Text>
+                  <Text style={[styles.firstPetText, { color: colors.primaryText }]}>Cadastrar primeiro pet</Text>
+                </Pressable>
+              )}
             </View>
           }
           refreshing={isLoading}
           onRefresh={() => void fetchPets()}
-          contentContainerStyle={styles.list}
+          contentContainerStyle={[styles.list, styles.listContent]}
         />
       )}
       <Link href="/sobre" style={[styles.about, { color: colors.primary }]}>Sobre o app</Link>
@@ -151,6 +165,7 @@ const styles = StyleSheet.create({
   addButton: { width: 48, height: 48, borderRadius: 24, alignItems: 'center', justifyContent: 'center' },
   addText: { color: '#FFFFFF', fontSize: 26, fontWeight: '700' },
   list: { gap: 10, paddingHorizontal: 16, paddingBottom: 24 },
+  listContent: { flexGrow: 1 },
   section: { paddingVertical: 8, fontSize: 18, fontWeight: '800' },
   card: { flexDirection: 'row', gap: 12, padding: 12, borderRadius: 16, boxShadow: '0 4px 12px rgba(38,50,56,0.12)' },
   pressed: { opacity: 0.75 },
@@ -167,8 +182,21 @@ const styles = StyleSheet.create({
   toggleText: { color: '#FFFFFF', fontWeight: '700' },
   loading: { flex: 1, alignItems: 'center', justifyContent: 'center' },
   error: { color: '#D32F2F', paddingHorizontal: 16 },
-  empty: { alignItems: 'center', gap: 12, padding: 24 },
+  empty: { flex: 1, minHeight: 420, alignItems: 'center', justifyContent: 'center', gap: 18, padding: 24 },
   emptyTitle: { fontSize: 18, fontWeight: '700' },
+  firstPetButton: {
+    width: '100%',
+    maxWidth: 360,
+    minHeight: 72,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 12,
+    paddingHorizontal: 20,
+    borderRadius: 16,
+  },
+  firstPetIcon: { fontSize: 34, lineHeight: 38, fontWeight: '700' },
+  firstPetText: { fontSize: 17, fontWeight: '800' },
   about: { padding: 12, textAlign: 'center', color: '#FF8C42', fontWeight: '700' },
   modalBackdrop: { flex: 1, justifyContent: 'flex-end', backgroundColor: '#00000055' },
   modalCard: { gap: 12, padding: 20, borderTopLeftRadius: 24, borderTopRightRadius: 24 },
