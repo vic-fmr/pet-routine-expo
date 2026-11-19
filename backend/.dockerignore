@@ -1,0 +1,8 @@
+node_modules
+npm-debug.log
+dist
+.env
+.env.*
+pet-routine.db
+pet-routine.db-shm
+pet-routine.db-wal

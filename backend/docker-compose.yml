@@ -1,0 +1,17 @@
+services:
+  backend:
+    build:
+      context: .
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3000:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DB_PATH: /var/lib/pet-routine/pet-routine.db
+      JWT_SECRET: ${JWT_SECRET}
+    volumes:
+      - pet-routine-data:/var/lib/pet-routine
+
+volumes:
+  pet-routine-data:
