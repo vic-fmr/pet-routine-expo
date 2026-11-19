@@ -14,7 +14,12 @@ const PORTES: PortePet[] = ['pequeno', 'medio', 'grande'];
 function PetCard({ pet, onToggle }: { pet: Pet; onToggle: (id: string) => void }) {
   const router = useRouter();
   return (
-    <Pressable onPress={() => router.push(`/pet/${pet.id}`)} style={({ pressed }) => [styles.card, pressed && styles.pressed]}>
+    <Pressable
+      onPress={() => router.push(`/pet/${pet.id}`)}
+      accessibilityRole="button"
+      accessibilityLabel={`Abrir detalhes de ${pet.nome}`}
+      style={({ pressed }) => [styles.card, pressed && styles.pressed]}
+    >
       {pet.fotoUri ? (
         <Image source={{ uri: pet.fotoUri }} style={styles.photo} contentFit="cover" recyclingKey={pet.id} />
       ) : (
@@ -27,7 +32,14 @@ function PetCard({ pet, onToggle }: { pet: Pet; onToggle: (id: string) => void }
           <Text style={[styles.badge, styles.status]}>{rotuloStatusPasseio(pet.statusPasseio)}</Text>
         </View>
         <Text style={styles.age}>{pet.idadeMeses} meses</Text>
-        <Pressable onPress={() => onToggle(pet.id)} style={styles.toggle}><Text style={styles.toggleText}>Alternar passeio</Text></Pressable>
+        <Pressable
+          onPress={() => onToggle(pet.id)}
+          accessibilityRole="button"
+          accessibilityLabel={`Alternar passeio de ${pet.nome}`}
+          style={({ pressed }) => [styles.toggle, pressed && styles.pressed]}
+        >
+          <Text style={styles.toggleText}>Alternar passeio</Text>
+        </Pressable>
       </View>
     </Pressable>
   );
@@ -71,7 +83,14 @@ export default function PetsScreen() {
     <View style={[styles.screen, { backgroundColor: background }]}>
       <View style={styles.header}>
         <TextInput value={busca} onChangeText={setBusca} placeholder="Buscar pet por nome..." placeholderTextColor="#78909C" style={styles.search} />
-        <Pressable onPress={() => setModal(true)} style={styles.addButton}><Text style={styles.addText}>＋</Text></Pressable>
+        <Pressable
+          onPress={() => setModal(true)}
+          accessibilityRole="button"
+          accessibilityLabel="Cadastrar novo pet"
+          style={({ pressed }) => [styles.addButton, pressed && styles.pressed]}
+        >
+          <Text style={styles.addText}>＋</Text>
+        </Pressable>
       </View>
       {error && <Text style={styles.error}>{error}</Text>}
       {isLoading ? (

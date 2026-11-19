@@ -10,6 +10,7 @@ import { rotuloEspecie, rotuloStatusPasseio, type Pet } from '../../types/pet';
 import { WalkTimer } from '../../components/walk-timer';
 import { listarSessoesPasseio, salvarSessaoPasseio, type PasseioLog } from '../../services/passeio-db';
 import { agendarLembretePasseio } from '../../services/notifications';
+import { alvoToque, espaco, raio } from '../../theme';
 
 export default function PetDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -17,7 +18,7 @@ export default function PetDetailScreen() {
   const pets = usePetStore((state) => state.pets);
   const pet = useMemo(() => pets.find((item) => item.id === id), [pets, id]);
   const { togglePasseio, registrarPasseio, removePet } = usePetStore();
-  const { isDark } = useTheme();
+  const { colors } = useTheme();
   const [logs, setLogs] = useState<PasseioLog[]>([]);
   const [sensorError, setSensorError] = useState<string | null>(null);
   const [notificationSent, setNotificationSent] = useState(false);
@@ -96,8 +97,8 @@ export default function PetDetailScreen() {
     return <View style={styles.center}><Text>Pet não encontrado.</Text><Link href="/(tabs)" style={styles.link}>Voltar</Link></View>;
   }
 
-  const background = isDark ? '#17212B' : '#FEF7EE';
-  const text = isDark ? '#F7FAFC' : '#263238';
+  const background = colors.background;
+  const text = colors.text;
   return (
     <ScrollView style={{ flex: 1, backgroundColor: background }} contentContainerStyle={styles.content}>
       {pet.fotoUri ? (
@@ -121,13 +122,13 @@ export default function PetDetailScreen() {
       </View>
       {sensorError && <Text style={styles.error}>{sensorError}</Text>}
       <View style={styles.actions}>
-        <Pressable onPress={() => void togglePasseio(pet.id)} style={styles.action}><Text style={styles.actionText}>Alternar status</Text></Pressable>
-        <Pressable onPress={() => void registrarComFoto()} style={styles.action}><Text style={styles.actionText}>Registrar com GPS</Text></Pressable>
-        <Pressable onPress={() => void escolherFoto()} style={styles.action}><Text style={styles.actionText}>Escolher foto</Text></Pressable>
-        <Link href={{ pathname: '/foto-do-pet', params: { petId: pet.id } }} style={styles.actionLink}>Abrir câmera e galeria</Link>
+        <Pressable onPress={() => void togglePasseio(pet.id)} accessibilityRole="button" accessibilityLabel={`Alternar status de ${pet.nome}`} style={styles.action}><Text style={styles.actionText}>Alternar status</Text></Pressable>
+        <Pressable onPress={() => void registrarComFoto()} accessibilityRole="button" accessibilityLabel={`Registrar passeio de ${pet.nome} com GPS`} style={styles.action}><Text style={styles.actionText}>Registrar com GPS</Text></Pressable>
+        <Pressable onPress={() => void escolherFoto()} accessibilityRole="button" accessibilityLabel={`Escolher foto para o passeio de ${pet.nome}`} style={styles.action}><Text style={styles.actionText}>Escolher foto</Text></Pressable>
+        <Link href={{ pathname: '/foto-do-pet', params: { petId: pet.id } }} style={styles.actionLink} accessibilityRole="button">Abrir câmera e galeria</Link>
       </View>
       <WalkTimer onSalvar={(seconds) => void salvarTempo(seconds)} />
-      <Pressable onPress={() => void agendar()} style={styles.action}><Text style={styles.actionText}>Agendar lembrete em 5 segundos</Text></Pressable>
+      <Pressable onPress={() => void agendar()} accessibilityRole="button" accessibilityLabel="Agendar lembrete de passeio para cinco segundos" style={styles.action}><Text style={styles.actionText}>Agendar lembrete em 5 segundos</Text></Pressable>
       {notificationSent && <Text style={styles.success}>Lembrete agendado.</Text>}
       <View style={styles.card}>
         <Text style={[styles.sectionTitle, { color: text }]}>Histórico local</Text>
@@ -138,13 +139,13 @@ export default function PetDetailScreen() {
           </View>
         ))}
       </View>
-      <Pressable onPress={() => void excluir()} style={styles.delete}><Text style={styles.actionText}>Excluir pet</Text></Pressable>
+      <Pressable onPress={() => void excluir()} accessibilityRole="button" accessibilityLabel={`Excluir ${pet.nome}`} style={styles.delete}><Text style={styles.actionText}>Excluir pet</Text></Pressable>
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  content: { gap: 12, padding: 16, paddingBottom: 32 },
+  content: { gap: espaco.smd, padding: espaco.md, paddingBottom: espaco.xl },
   center: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 12 },
   link: { color: '#FF8C42', fontWeight: '700' },
   hero: { width: '100%', aspectRatio: 1.35, borderRadius: 20 },
@@ -158,10 +159,10 @@ const styles = StyleSheet.create({
   error: { color: '#D32F2F', padding: 10, borderRadius: 10, backgroundColor: '#FFEBEE' },
   success: { color: '#2E7D32', fontWeight: '700' },
   actions: { gap: 8 },
-  action: { alignItems: 'center', padding: 12, borderRadius: 10, backgroundColor: '#FF8C42' },
-  actionLink: { textAlign: 'center', padding: 12, borderRadius: 10, backgroundColor: '#FFE2CD', color: '#263238', fontWeight: '700' },
+  action: { minHeight: alvoToque, justifyContent: 'center', alignItems: 'center', padding: espaco.smd, borderRadius: raio.medio, backgroundColor: '#FF8C42' },
+  actionLink: { minHeight: alvoToque, textAlign: 'center', textAlignVertical: 'center', padding: espaco.smd, borderRadius: raio.medio, backgroundColor: '#FFE2CD', color: '#263238', fontWeight: '700' },
   actionText: { color: '#FFFFFF', fontWeight: '800' },
   sectionTitle: { fontSize: 18, fontWeight: '800' },
   logRow: { flexDirection: 'row', justifyContent: 'space-between', gap: 8, paddingVertical: 6 },
-  delete: { alignItems: 'center', padding: 12, borderRadius: 10, backgroundColor: '#D32F2F' },
+  delete: { minHeight: alvoToque, justifyContent: 'center', alignItems: 'center', padding: espaco.smd, borderRadius: raio.medio, backgroundColor: '#D32F2F' },
 });
