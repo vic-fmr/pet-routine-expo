@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Host, Picker, Switch } from '@expo/ui';
-import { Pressable, Text, View } from 'react-native';
+import Constants from 'expo-constants';
+import { Pressable, Switch as NativeSwitch, Text, View } from 'react-native';
 
 type MetaPasseio = 'Curto' | 'Moderado' | 'Longo';
 const METAS: MetaPasseio[] = ['Curto', 'Moderado', 'Longo'];
@@ -8,6 +9,29 @@ const METAS: MetaPasseio[] = ['Curto', 'Moderado', 'Longo'];
 export function NativePetReminderSettings() {
   const [enabled, setEnabled] = useState(true);
   const [meta, setMeta] = useState<MetaPasseio>('Moderado');
+
+  if (Constants.appOwnership === 'expo') {
+    return (
+      <View style={{ gap: 12 }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
+          <Text style={{ flex: 1, fontWeight: '700', color: '#263238' }}>Lembretes diarios de passeio</Text>
+          <NativeSwitch value={enabled} onValueChange={setEnabled} />
+        </View>
+        <Text style={{ fontWeight: '700', color: '#263238' }}>Meta diaria: {meta}</Text>
+        <View style={{ flexDirection: 'row', gap: 8 }}>
+          {METAS.map((item) => (
+            <Pressable
+              key={item}
+              onPress={() => setMeta(item)}
+              style={{ flex: 1, padding: 10, alignItems: 'center', borderRadius: 10, backgroundColor: meta === item ? '#FF8C42' : '#EEF1F4' }}
+            >
+              <Text style={{ color: meta === item ? '#FFFFFF' : '#263238', fontWeight: '700' }}>{item}</Text>
+            </Pressable>
+          ))}
+        </View>
+      </View>
+    );
+  }
 
   return (
     <View style={{ gap: 12 }}>
