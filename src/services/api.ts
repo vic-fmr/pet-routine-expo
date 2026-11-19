@@ -1,6 +1,26 @@
 import { useAuthStore } from '../store/use-auth-store';
+import Constants from 'expo-constants';
+import { Platform } from 'react-native';
 
-export const BASE_URL = process.env.EXPO_PUBLIC_API_URL ?? 'http://localhost:3000';
+function resolveBaseUrl(): string {
+  if (process.env.EXPO_PUBLIC_API_URL) {
+    return process.env.EXPO_PUBLIC_API_URL;
+  }
+
+  const hostUri = Constants.expoConfig?.hostUri;
+  if (hostUri) {
+    const host = hostUri.split(':')[0];
+    if (host && host !== 'localhost' && host !== '127.0.0.1') {
+      return `http://${host}:3000`;
+    }
+  }
+
+  return Platform.OS === 'android'
+    ? 'http://10.0.2.2:3000'
+    : 'http://localhost:3000';
+}
+
+export const BASE_URL = resolveBaseUrl();
 
 export async function apiFetch<T>(path: string, init: RequestInit = {}): Promise<T> {
   const token = useAuthStore.getState().sessionToken;
