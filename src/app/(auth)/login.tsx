@@ -3,10 +3,11 @@ import { ActivityIndicator, Pressable, StyleSheet, Text, TextInput, View } from 
 import { Link, useRouter } from 'expo-router';
 import { loginUser } from '../../services/auth-service';
 import { useTheme } from '../../context/theme-context';
+import { alvoToque, raio, espaco } from '../../theme';
 
 export default function LoginScreen() {
   const router = useRouter();
-  const { isDark } = useTheme();
+  const { colors } = useTheme();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -29,32 +30,37 @@ export default function LoginScreen() {
     }
   }
 
-  const colors = isDark ? dark : light;
   return (
     <View style={[styles.screen, { backgroundColor: colors.background }]}>
-      <View style={styles.card}>
-        <Text className="text-3xl font-bold text-center" style={[styles.title, { color: colors.text }]}>Pet Routine 🐾</Text>
-        <Text style={{ color: colors.muted }}>Entre para cuidar da rotina dos seus pets.</Text>
-        <TextInput value={email} onChangeText={setEmail} placeholder="E-mail" autoCapitalize="none" keyboardType="email-address" style={[styles.input, { color: colors.text, borderColor: colors.border }]} />
-        <TextInput value={password} onChangeText={setPassword} placeholder="Senha" secureTextEntry style={[styles.input, { color: colors.text, borderColor: colors.border }]} />
-        {error && <Text style={{ color: '#D32F2F' }}>{error}</Text>}
-        <Pressable onPress={entrar} disabled={loading} style={({ pressed }) => [styles.primary, pressed && styles.pressed]}>
-          {loading ? <ActivityIndicator color="#FFFFFF" /> : <Text style={styles.primaryText}>Entrar</Text>}
+      <View style={[styles.card, { backgroundColor: colors.surface }]}>
+        <Text style={[styles.title, { color: colors.text }]}>Pet Routine 🐾</Text>
+        <Text style={{ color: colors.textMuted }}>Entre para cuidar da rotina dos seus pets.</Text>
+        <View style={styles.field}>
+          <Text style={[styles.label, { color: colors.text }]}>E-mail</Text>
+          <TextInput value={email} onChangeText={setEmail} placeholder="nome@exemplo.com" placeholderTextColor={colors.textMuted} autoCapitalize="none" autoCorrect={false} keyboardType="email-address" textContentType="emailAddress" accessibilityLabel="E-mail" style={[styles.input, { color: colors.text, borderColor: colors.border, backgroundColor: colors.surface }]} />
+        </View>
+        <View style={styles.field}>
+          <Text style={[styles.label, { color: colors.text }]}>Senha</Text>
+          <TextInput value={password} onChangeText={setPassword} placeholder="Sua senha" placeholderTextColor={colors.textMuted} secureTextEntry textContentType="password" accessibilityLabel="Senha" style={[styles.input, { color: colors.text, borderColor: colors.border, backgroundColor: colors.surface }]} />
+        </View>
+        {error && <Text accessibilityRole="alert" style={[styles.error, { color: colors.error }]}>{error}</Text>}
+        <Pressable onPress={() => void entrar()} disabled={loading} accessibilityRole="button" accessibilityLabel="Entrar na conta" style={({ pressed }) => [styles.primary, { backgroundColor: pressed ? colors.primaryPressed : colors.primary, opacity: loading ? 0.7 : 1 }]}>
+          {loading ? <ActivityIndicator color={colors.primaryText} /> : <Text style={[styles.primaryText, { color: colors.primaryText }]}>Entrar</Text>}
         </Pressable>
-        <Link href="/(auth)/signup" style={{ color: colors.primary, textAlign: 'center', fontWeight: '700' }}>Criar uma conta</Link>
+        <Link href="/(auth)/signup" style={{ color: colors.primary, minHeight: alvoToque, textAlign: 'center', textAlignVertical: 'center', fontWeight: '700' }}>Criar uma conta</Link>
       </View>
     </View>
   );
 }
 
-const light = { background: '#FEF7EE', text: '#263238', muted: '#607D8B', border: '#CBD5DA', primary: '#FF8C42' };
-const dark = { background: '#17212B', text: '#F7FAFC', muted: '#B0BEC5', border: '#455A64', primary: '#FFAB76' };
 const styles = StyleSheet.create({
-  screen: { flex: 1, justifyContent: 'center', padding: 24 },
-  card: { gap: 14, padding: 20, borderRadius: 20, backgroundColor: '#FFFFFF18' },
+  screen: { flex: 1, justifyContent: 'center', padding: espaco.lg },
+  card: { gap: espaco.smd, padding: espaco.lg, borderRadius: raio.extraGrande, boxShadow: '0 8px 24px rgba(38,50,56,0.12)' },
   title: { fontSize: 30, fontWeight: '800', textAlign: 'center' },
-  input: { borderWidth: 1, borderRadius: 12, paddingHorizontal: 14, paddingVertical: 12, backgroundColor: '#FFFFFF' },
-  primary: { alignItems: 'center', padding: 14, borderRadius: 12, backgroundColor: '#FF8C42' },
-  pressed: { opacity: 0.75 },
-  primaryText: { color: '#FFFFFF', fontWeight: '800' },
+  field: { gap: espaco.xs },
+  label: { fontSize: 14, fontWeight: '700' },
+  input: { minHeight: alvoToque, borderWidth: 1, borderRadius: raio.medio, paddingHorizontal: espaco.smd, fontSize: 16 },
+  error: { fontSize: 14, fontWeight: '700' },
+  primary: { minHeight: alvoToque, alignItems: 'center', justifyContent: 'center', paddingHorizontal: espaco.md, borderRadius: raio.medio },
+  primaryText: { fontSize: 16, fontWeight: '800' },
 });

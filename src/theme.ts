@@ -15,37 +15,34 @@
 export const cores = {
   fundo: '#FEF7EE',
   cartao: '#FFFFFF',
-    //   texto, textoFraco, primaria, sucesso, erro.
-  //   Escolha cores que façam sentido para um app de pets.
-  //   Exemplo: primaria poderia ser um laranja acolhedor.
   texto: '#333333',
   textoFraco: '#777777',
-  primaria: '#FF8C00',
+  primaria: '#B84E16',
+  primariaClara: '#FFF0E5',
   sucesso: '#4CAF50',
   erro: '#F44336',
 } as const;
 
 export const espaco = {
-    //   Escolha uma progressão consistente — 4/8/16/24 é um bom default.
-  //   Exemplo: xs: 4, sm: 8, md: 16, lg: 24
   xs: 4,
   sm: 8,
+  smd: 12,
   md: 16,
   lg: 24,
   xl: 32,
 } as const;
 
 export const tipografia = {
-    //   de TEXTO (fontSize, fontWeight, color).
-  //   A legenda pode reaproveitar `cores.textoFraco`.
-  //   Não inclua layout (margin, padding) — isso é decisão do componente.
-  //
-  //   Exemplo de formato:
-  //   titulo: { fontSize: 20, fontWeight: '600' as const, color: cores.texto },
   titulo: { fontSize: 24, fontWeight: '600' as const, color: '#333333' },
   corpo: { fontSize: 16, fontWeight: '400' as const, color: '#333333' },
   legenda: { fontSize: 12, fontWeight: '400' as const, color: '#777777' },
 } as const;
 
-//   do componente NÃO usa? Responda em um comentário de uma linha aqui.
-// O as const permite inferência de tipos literais fortes para os tokens; StyleSheet.create já retorna tipos válidos pro RN e não precisa de cast literal.
+export const raio = {
+  pequeno: 8,
+  medio: 12,
+  grande: 16,
+  extraGrande: 20,
+} as const;
+
+export const alvoToque = 44;
